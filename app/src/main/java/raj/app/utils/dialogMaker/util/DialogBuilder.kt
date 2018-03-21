@@ -8,6 +8,7 @@ import android.support.annotation.StyleRes
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.widget.ImageView
+import raj.app.R
 
 
 @Suppress("NAME_SHADOWING")
@@ -24,12 +25,12 @@ class DialogBuilder(private val context: Context, @StyleRes myAlertDialogStyle: 
         dialog.setTitle(title)
         dialog.setMessage(message)
         dialog.setCancelable(cancalable)
-        var cancelButtonText: CharSequence = "Okay"
+        var buttonText: CharSequence = context.resources.getText(R.string.okay)
         if (callback != null) {
-            dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Okay") { _, _ -> callback.dialogButtonClicked() }
-            cancelButtonText = "Cancel"
+            dialog.setButton(DialogInterface.BUTTON_POSITIVE, buttonText) { _, _ -> callback.dialogButtonClicked() }
+            buttonText = context.resources.getText(R.string.cancel)
         }
-        dialog.setButton(DialogInterface.BUTTON_POSITIVE, cancelButtonText) { _, _ ->
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, buttonText) { _, _ ->
             close()
         }
         dialog.setOnShowListener {
